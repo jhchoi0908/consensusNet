@@ -1,6 +1,6 @@
 # Consensus Neural Network (ConsensusNet)
 
-## [Integrating Disparate Sources of Experts for Robust Image Denoising] (https://arxiv.org/abs/1711.06712)
+## [Integrating Disparate Sources of Experts for Robust Image Denoising](https://arxiv.org/abs/1711.06712)
 
 ### Abstract
 
