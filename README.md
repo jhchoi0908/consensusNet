@@ -28,7 +28,7 @@ We study an image denoising problem: Given a set of image denoisers, each having
   ```
   python combine_class.py --(options)
   ```
-  - Experiments 3: 
+  - Experiments 3
     - Add your paths for MatConvNet, DnCNN, FFDNet and BM3D of combine_denoiser2.m
     ```
     run /home/matconvnet-1.0-beta25/matlab/vl_setupnn
@@ -47,7 +47,7 @@ We study an image denoising problem: Given a set of image denoisers, each having
   ```
 
 ### Testing Instructions
-- Step1: Same as Step2 in Training Instructions
+- Step1: [Combine](./combine) - Same as Step2 in Training Instructions
 - Step2: [Booster](./test)
   ```
   python test.py --(options)
