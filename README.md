@@ -15,7 +15,7 @@ We study an image denoising problem: Given a set of image denoisers, each having
 3. Different Denoiser Types (denoisers = DnCNN, FFDNet, BM3D, REDNet)
 
 ### Training Instructions
-- Step1: [Train Neural Network](./train/single)
+- Step1: [Train Neural Network](./train/1.single)
   ```
   python train.py --(options)
   ```
@@ -41,13 +41,13 @@ We study an image denoising problem: Given a set of image denoisers, each having
     python combine_denoiser1.py --(options)
     (matlab) combine_denoiser2.m
     ```
-- Step3: [Train Booster](./train/booster)
+- Step3: [Train Booster](./train/2.booster)
   ```
   python train.py --(options)
   ```
 
 ### Testing Instructions
-- Step1: Same as [Step2 in Training Instructions](./)
+- Step1: Same as [Step2 in Training Instructions](./README#22)
 - Step2: [Booster](./test)
   ```
   python test.py --(options)
@@ -55,7 +55,7 @@ We study an image denoising problem: Given a set of image denoisers, each having
 
 ### Requirements and Dependencies
 - Cuda-8.0 & cuDNN v-5.1
-- Tensorflow 1.2.1
+- [Tensorflow 1.2.1](https://www.tensorflow.org/)
 - [MatConvNet](http://www.vlfeat.org/matconvnet/) & MATLAB R2017a: for Experiments 1-b & 3
 - [DnCNN](https://github.com/cszn/DnCNN): for Experiments 1-b & 3
 - [FFDNet](https://github.com/cszn/FFDNet): for Experiments 3
