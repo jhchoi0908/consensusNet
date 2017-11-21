@@ -47,7 +47,7 @@ We study an image denoising problem: Given a set of image denoisers, each having
   ```
 
 ### Testing Instructions
-- Step1: Same as [Step2 in Training Instructions](README#L22)
+- Step1: Same as Step2 in Training Instructions
 - Step2: [Booster](./test)
   ```
   python test.py --(options)
