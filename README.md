@@ -14,7 +14,14 @@ Given a set of image denoisers, each having a different denoising capability, is
 
 
 ### Testing Instructions
+- Experiments 1 and 3
   ```
+  python test.py --(options)
+  ```
+- Experiment 2
+  ```
+  matlab denoisers.m
+  python rednet.py --(options)
   python test.py --(options)
   ```
 
