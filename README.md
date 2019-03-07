@@ -1,54 +1,19 @@
 # Consensus Neural Network (ConsensusNet)
 
-## [Integrating Disparate Sources of Experts for Robust Image Denoising](https://arxiv.org/abs/1711.06712)
+## [Optimal Combination of Image Denoisers](https://arxiv.org/abs/1711.06712)
 
 ### Abstract
 
-We study an image denoising problem: Given a set of image denoisers, each having a different denoising capability, can we design a framework that allows us to integrate the individual denoisers to produce an overall better result? If we can do so, then potentially we can integrate multiple weak denoisers to denoise complex scenes. The goal of this paper is to present a meta-procedure called the Consensus Neural Network (ConsensusNet). Given a set of initial denoisers, ConsensusNet takes the initial estimates and generates a linear combination of the results. The combined estimate is then fed to a booster neural network to reduce the amount of method noise. ConsensusNet is a modular framework that allows any image denoiser to be used in the initial stage. Experimental results show that ConsensusNet can consistently improve denoising performance for both deterministic denoisers and neural network denoisers.
+Given a set of image denoisers, each having a different denoising capability, is there a provably optimal way of combining these denoisers to produce an overall better result? An answer to this question is fundamental to designing an ensemble of weak estimators for complex scenes. In this paper, we present an optimal combination scheme by leveraging deep neural networks and convex optimization. The proposed framework, called the Consensus Neural Network (CsNet), introduces three new concepts in image denoising: (1) A provably optimal procedure to combine the denoised outputs via convex optimization; (2) A deep neural network to estimate the mean squared error (MSE) of denoised images without needing the ground truths; (3) An image boosting procedure using a deep neural network to improve contrast and to recover lost details of the combined images. Experimental results show that CsNet can consistently improve denoising performance for both deterministic and neural network denoisers.
 
 
 ### Experiments
-1. Noise-Level Mismatch (sigma = 10, 20, 30, 40, 50)
-- REDNet
-- DnCNN
+1. Different Noise Level (sigma = 10, 20, 30, 40, 50)
 2. Different Image Classes (classes = building, face, flower)
 3. Different Denoiser Types (denoisers = DnCNN, FFDNet, BM3D, REDNet)
 
-### Training Instructions
-- Step1: [Train Neural Network](./train/1.single)
-  ```
-  python train.py --(options)
-  ```
-- Step2: [Combine](./combine)
-  - Experiments 1
-  ```
-  python combine_noise.py --(options)
-  ```
-  - Experiments 2
-  ```
-  python combine_class.py --(options)
-  ```
-  - Experiments 3
-    - Add your paths for MatConvNet, DnCNN, FFDNet and BM3D of combine_denoiser2.m
-    ```
-    run /home/matconvnet-1.0-beta25/matlab/vl_setupnn
-    dncnn_path	= '...';
-    bm3d_path	= '...';
-    ffdnet_path	= '...';
-    ```
-    - Run codes
-    ```
-    python combine_denoiser1.py --(options)
-    (matlab) combine_denoiser2.m
-    ```
-- Step3: [Train Booster](./train/2.booster)
-  ```
-  python train.py --(options)
-  ```
 
 ### Testing Instructions
-- Step1: [Combine](./combine) - Same as Step2 in Training Instructions
-- Step2: [Booster](./test)
   ```
   python test.py --(options)
   ```
@@ -56,6 +21,6 @@ We study an image denoising problem: Given a set of image denoisers, each having
 ### Requirements and Dependencies
 - Cuda-8.0 & cuDNN v-5.1
 - [Tensorflow 1.2.1](https://www.tensorflow.org/)
-- [MatConvNet](http://www.vlfeat.org/matconvnet/) & MATLAB R2017a: for Experiments 1-b & 3
-- [DnCNN](https://github.com/cszn/DnCNN): for Experiments 1-b & 3
-- [FFDNet](https://github.com/cszn/FFDNet): for Experiments 3
+- [MatConvNet](http://www.vlfeat.org/matconvnet/) & MATLAB R2017a: for Different Denoiser Types
+- [DnCNN](https://github.com/cszn/DnCNN): for Different Denoiser Types 
+- [FFDNet](https://github.com/cszn/FFDNet): for Different Denoiser Types
