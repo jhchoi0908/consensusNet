@@ -16,7 +16,7 @@ addpath(fullfile(ffdnet_path, 'utilities'));
 addpath(fullfile(rednet_path, 'caffe/matlab'));
 addpath(fullfile(rednet_path, 'utils'));
 
-folder_test     = '/depot/chan129/data/CSNet/BSD200';
+folder_test     = '../../data';
 filePaths   = [];
 ext         = {'*.jpg', '*.png', '*.bmp'};
 for i = 1 : length(ext)

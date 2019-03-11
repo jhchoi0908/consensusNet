@@ -1,14 +1,14 @@
 import os, sys, time, argparse, random
 import tensorflow	as tf
 import numpy		as np
-sys.path.append('/home/choi240/CSNet')
+sys.path.append('../../')
 from utils		import *
 from network		import *
 
 parser	= argparse.ArgumentParser(description='')
-parser.add_argument('--patch_size',	dest='patch_size',	type=int,	default=64,						help='patch size')
-parser.add_argument('--test_dir',	dest='test_dir',			default='/depot/chan129/data/CSNet/results/different_type',	help='the directory for validation data')
-parser.add_argument('--ckpt_dir',	dest='ckpt_dir',			default='/home/choi240/CSNet/trained_model',		help='the directory for meta file')
+parser.add_argument('--patch_size',	dest='patch_size',	type=int,	default=64,				help='patch size')
+parser.add_argument('--test_dir',	dest='test_dir',			default='../../data',			help='the directory for validation data')
+parser.add_argument('--ckpt_dir',	dest='ckpt_dir',			default='../../trained_model',		help='the directory for meta file')
 args	= parser.parse_args()
 
 

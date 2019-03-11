@@ -1,15 +1,15 @@
 import os, sys, time, argparse, random
 import tensorflow	as tf
 import numpy		as np
-sys.path.append('/home/choi240/CSNet')
+sys.path.append('../../')
 from utils		import *
 from network		import *
 
 parser	= argparse.ArgumentParser(description='')
-parser.add_argument('--patch_size',	dest='patch_size',	type=int,	default=64,						help='patch size')
-parser.add_argument('--test_dir',	dest='test_dir',			default='/depot/chan129/data/CSNet/BSD200',		help='the directory for validation data')
-parser.add_argument('--ckpt_dir',	dest='ckpt_dir',			default='/home/choi240/CSNet/trained_model',		help='the directory for meta file')
-parser.add_argument('--out_dir',	dest='out_dir',				default='/depot/chan129/data/CSNet/results/different_noise',	help='the directory for output file')
+parser.add_argument('--patch_size',	dest='patch_size',	type=int,	default=64,				help='patch size')
+parser.add_argument('--test_dir',	dest='test_dir',			default='../../data',			help='the directory for validation data')
+parser.add_argument('--ckpt_dir',	dest='ckpt_dir',			default='../../trained_model',		help='the directory for meta file')
+parser.add_argument('--out_dir',	dest='out_dir',				default='outputs',			help='the directory for output file')
 args	= parser.parse_args()
 
 
@@ -28,13 +28,11 @@ def main():
 	model_2		= network2(os.path.join(args.ckpt_dir, 'booster_T3'))
 	model_blind30	= network0(os.path.join(args.ckpt_dir, 'rednet_blind30'))
 	model_blind150	= network0(os.path.join(args.ckpt_dir, 'rednet_blind'))
-	model_blind30_	= network0(os.path.join('/home/choi240/REDNet_blind/meta', 'rednet_blind30'))
-	model_blind150_	= network0(os.path.join('/home/choi240/REDNet_blind/meta', 'rednet_blind150'))
 	
 	np.random.seed(random_value)
 	files		= os.listdir(path_test)
 	sigmaSet	= range(10, 51)
-	PSNR_to		= np.zeros((len(sigmaSet), len(init_denoisers)+11))
+	PSNR_to		= np.zeros((len(sigmaSet), len(init_denoisers)+9))
 	
 	for sigma in range(10, 51, 5):
 		path_gt		= os.path.join(args.out_dir, str(sigma), 'groundtruth')
@@ -48,8 +46,6 @@ def main():
 		path_after	= os.path.join(args.out_dir, str(sigma), 'after')
 		path_blind30	= os.path.join(args.out_dir, str(sigma), 'bline30')
 		path_blind150	= os.path.join(args.out_dir, str(sigma), 'blind150')
-		path_blind30_	= os.path.join(args.out_dir, str(sigma), 'bline30_2')
-		path_blind150_	= os.path.join(args.out_dir, str(sigma), 'blind150_2')
 		
 		if not os.path.exists(path_gt):
 			os.makedirs(path_gt)
@@ -73,10 +69,6 @@ def main():
 			os.makedirs(path_blind30)
 		if not os.path.exists(path_blind150):
 			os.makedirs(path_blind150)
-		if not os.path.exists(path_blind30_):
-			os.makedirs(path_blind30_)
-		if not os.path.exists(path_blind150_):
-			os.makedirs(path_blind150_)
 	
 	for fname in files:
 		
@@ -113,17 +105,14 @@ def main():
 			# REDNet Blind
 			img_den_b30	= model_blind30.run(img_no4)[0,:,:,0]
 			img_den_b150	= model_blind150.run(img_no4)[0,:,:,0]
-			img_den_b30_	= model_blind30_.run(img_no4)[0,:,:,0]
-			img_den_b150_	= model_blind150_.run(img_no4)[0,:,:,0]
 			
 			PSNR	= [cal_psnr(img_gt, img_no)]		+ [cal_psnr(img_gt, temp) for temp in img_de]	\
 				+ [cal_psnr(img_gt, img_com_nn)]	+ [cal_psnr(img_gt, img_out_nn)]	+ [cal_psnr(img_gt, img_com_sure)]	+ [cal_psnr(img_gt, img_out_sure)]	\
-				+ [cal_psnr(img_gt, img_com_ora)]	+ [cal_psnr(img_gt, img_out_ora)]	+ [cal_psnr(img_gt, img_den_b30)]	+ [cal_psnr(img_gt, img_den_b150)]	\
-				+ [cal_psnr(img_gt, img_den_b30_)]	+ [cal_psnr(img_gt, img_den_b150_)]
+				+ [cal_psnr(img_gt, img_com_ora)]	+ [cal_psnr(img_gt, img_out_ora)]	+ [cal_psnr(img_gt, img_den_b30)]	+ [cal_psnr(img_gt, img_den_b150)]
 			
 			PSNR_to[i, :]	+= PSNR
-			print("  [sigma %2d] %.4f   %.4f %.4f %.4f %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f" % \
-				(sigma, PSNR[0], PSNR[1], PSNR[2], PSNR[3], PSNR[4], PSNR[5], PSNR[6], PSNR[7], PSNR[8], PSNR[9], PSNR[10], PSNR[11], PSNR[12], PSNR[13], PSNR[14], PSNR[15]))
+			print("  [sigma %2d] %.4f   %.4f %.4f %.4f %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f" % \
+				(sigma, PSNR[0], PSNR[1], PSNR[2], PSNR[3], PSNR[4], PSNR[5], PSNR[6], PSNR[7], PSNR[8], PSNR[9], PSNR[10], PSNR[11], PSNR[12], PSNR[13]))
 			
 			if sigma%5==0:
 				path_gt		= os.path.join(args.out_dir, str(sigma), 'groundtruth')
@@ -137,8 +126,6 @@ def main():
 				path_after	= os.path.join(args.out_dir, str(sigma), 'after')
 				path_blind30	= os.path.join(args.out_dir, str(sigma), 'bline30')
 				path_blind150	= os.path.join(args.out_dir, str(sigma), 'blind150')
-				path_blind30_	= os.path.join(args.out_dir, str(sigma), 'bline30_2')
-				path_blind150_	= os.path.join(args.out_dir, str(sigma), 'blind150_2')
 				
 				save_image(img_gt,		os.path.join(path_gt, fname))
 				save_image(img_no,		os.path.join(path_in, fname))
@@ -152,15 +139,13 @@ def main():
 				save_image(img_out_nn,		os.path.join(path_after,  fname))
 				save_image(img_den_b30,		os.path.join(path_blind30, fname))
 				save_image(img_den_b150,	os.path.join(path_blind150, fname))
-				save_image(img_den_b30_,	os.path.join(path_blind30_, fname))
-				save_image(img_den_b150_,	os.path.join(path_blind150_, fname))
 	
 	PSNR_to	/= len(files)
 	print("[*] final")
 	for i, sigma in enumerate(sigmaSet):
-		print("  [sigma %2d] %.4f   %.4f %.4f %.4f %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f" % \
+		print("  [sigma %2d] %.4f   %.4f %.4f %.4f %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f   %.4f %.4f" % \
 			(sigma, PSNR_to[i,0], PSNR_to[i,1], PSNR_to[i,2], PSNR_to[i,3], PSNR_to[i,4], PSNR_to[i,5], PSNR_to[i,6], PSNR_to[i,7], PSNR_to[i,8], \
-			PSNR_to[i,9], PSNR_to[i,10], PSNR_to[i,11], PSNR_to[i,12], PSNR_to[i,13], PSNR_to[i,14], PSNR_to[i,15]))
+			PSNR_to[i,9], PSNR_to[i,10], PSNR_to[i,11], PSNR_to[i,12], PSNR_to[i,13]))
 	
 
 if __name__ == "__main__":
