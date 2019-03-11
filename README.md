@@ -27,7 +27,7 @@ Given a set of image denoisers, each having a different denoising capability, is
 
 ### Requirements and Dependencies
 - Cuda-8.0 & cuDNN v-5.1
-- [Tensorflow 1.2.1](https://www.tensorflow.org/)
+- [Tensorflow 1.2.1] or above (https://www.tensorflow.org/)
 - [MatConvNet](http://www.vlfeat.org/matconvnet/) & MATLAB R2017a: for Different Denoiser Types
 - [DnCNN](https://github.com/cszn/DnCNN): for Different Denoiser Types 
 - [FFDNet](https://github.com/cszn/FFDNet): for Different Denoiser Types
