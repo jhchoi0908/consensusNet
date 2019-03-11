@@ -1,6 +1,4 @@
-# Consensus Neural Network (ConsensusNet)
-
-## [Optimal Combination of Image Denoisers](https://arxiv.org/abs/1711.06712)
+## [Optimal Combination of Image Denoisers](https://arxiv.org/abs/1711.06712) (ConsensusNet)
 
 ### Abstract
 
