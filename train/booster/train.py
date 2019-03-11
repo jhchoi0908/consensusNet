@@ -2,21 +2,21 @@ import os, sys, time, argparse, random, collections
 import tensorflow	as tf
 import numpy		as np
 from sklearn.utils	import shuffle
-sys.path.append('/home/choi240/ConsensusNet_final')
+sys.path.append('../../')
 from utils		import *
 from network		import *
 
 parser	= argparse.ArgumentParser(description='')
-parser.add_argument('--lr',		dest='lr',		type=float,	default=1e-3,						help='learning rate')
-parser.add_argument('--epochs',		dest='epochs',		type=int,	default=100,						help='number of epochs')
-parser.add_argument('--num_patches',	dest='num_patches',	type=int,	default=128,						help='the number of extracted patches')
-parser.add_argument('--patch_size',	dest='patch_size',	type=int,	default=64,						help='patch size')
-parser.add_argument('--batch_size',	dest='batch_size',	type=int,	default=128,						help='batch size')
-parser.add_argument('--train_dir',	dest='train_dir',			default='/depot/chan129/data/CSNet/BSD300',		help='the directory for training data')
-parser.add_argument('--valid_dir',	dest='valid_dir',			default='/depot/chan129/data/CSNet/Kodak',		help='the directory for validation data')
-parser.add_argument('--ckpt_dir',	dest='ckpt_dir',			default='/home/choi240/CSNet/trained_model',		help='the directory for meta file')
-parser.add_argument('--meta1',		dest='meta1',				default='mse_estimator',				help='the file for mse estimator')
-parser.add_argument('--meta2',		dest='meta2',				default='booster_T3',					help='the file for booster')
+parser.add_argument('--lr',		dest='lr',		type=float,	default=1e-3,				help='learning rate')
+parser.add_argument('--epochs',		dest='epochs',		type=int,	default=100,				help='number of epochs')
+parser.add_argument('--num_patches',	dest='num_patches',	type=int,	default=128,				help='the number of extracted patches')
+parser.add_argument('--patch_size',	dest='patch_size',	type=int,	default=64,				help='patch size')
+parser.add_argument('--batch_size',	dest='batch_size',	type=int,	default=128,				help='batch size')
+parser.add_argument('--train_dir',	dest='train_dir',			default='../../train_data',		help='the directory for training data')
+parser.add_argument('--valid_dir',	dest='valid_dir',			default='../../valid',			help='the directory for validation data')
+parser.add_argument('--ckpt_dir',	dest='ckpt_dir',			default='../../trained_model',		help='the directory for meta file')
+parser.add_argument('--meta1',		dest='meta1',				default='mse_estimator',		help='the file for mse estimator')
+parser.add_argument('--meta2',		dest='meta2',				default='booster_T3',			help='the file for booster')
 args	= parser.parse_args()
 
 

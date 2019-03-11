@@ -1,21 +1,21 @@
 import os, sys, time, argparse, random
 import tensorflow	as tf
 import numpy		as np
-sys.path.append('/home/choi240/CSNet')
+sys.path.append('../../')
 from utils		import *
 from network		import *
 
 parser	= argparse.ArgumentParser(description='')
-parser.add_argument('--lr',		dest='lr',		type=float,	default=1e-4,						help='learning rate')
-parser.add_argument('--epochs',		dest='epochs',		type=int,	default=50,						help='number of epochs')
-parser.add_argument('--patch_size',	dest='patch_size',	type=int,	default=64,						help='patch size')
-parser.add_argument('--batch_size',	dest='batch_size',	type=int,	default=128,						help='batch size')
-parser.add_argument('--data_gt',	dest='data_gt',				default='/depot/chan129/data/CSNet/BSD300_gt.npy',	help='the directory for patches from training groundtruth images')
-parser.add_argument('--data_no',	dest='data_no',				default='/depot/chan129/data/CSNet/BSD300_no.npy',	help='the directory for patches from training noisy images')
-parser.add_argument('--data_den',	dest='data_den',			default='/depot/chan129/data/CSNet/BSD300_den.npy',	help='the directory for patches from training denoiserd images')
-parser.add_argument('--valid_dir',	dest='valid_dir',			default='/depot/chan129/data/CSNet/Kodak',		help='the directory for validation groundtruth images')
-parser.add_argument('--ckpt_dir',	dest='ckpt_dir',			default='/home/choi240/CSNet/trained_model',		help='the directory for meta file')
-parser.add_argument('--meta1',		dest='meta1',				default='mse_estimator',				help='the file for initial denoiser')
+parser.add_argument('--lr',		dest='lr',		type=float,	default=1e-4,				help='learning rate')
+parser.add_argument('--epochs',		dest='epochs',		type=int,	default=50,				help='number of epochs')
+parser.add_argument('--patch_size',	dest='patch_size',	type=int,	default=64,				help='patch size')
+parser.add_argument('--batch_size',	dest='batch_size',	type=int,	default=128,				help='batch size')
+parser.add_argument('--data_gt',	dest='data_gt',				default='../../BSD300_gt.npy',		help='the directory for patches from training groundtruth images')
+parser.add_argument('--data_no',	dest='data_no',				default='../../BSD300_no.npy',		help='the directory for patches from training noisy images')
+parser.add_argument('--data_den',	dest='data_den',			default='../../BSD300_den.npy',		help='the directory for patches from training denoiserd images')
+parser.add_argument('--valid_dir',	dest='valid_dir',			default='../../data',			help='the directory for validation groundtruth images')
+parser.add_argument('--ckpt_dir',	dest='ckpt_dir',			default='../../trained_model',		help='the directory for meta file')
+parser.add_argument('--meta1',		dest='meta1',				default='mse_estimator',		help='the file for initial denoiser')
 args	= parser.parse_args()
 
 
