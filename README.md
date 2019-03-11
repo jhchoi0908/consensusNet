@@ -36,7 +36,7 @@ Given a set of image denoisers, each having a different denoising capability, is
 ```
 @article{choi2019,
   title={Optimal Combination of Image Denoisers},
-  author={Choi, Joon Hee and Elgendy, Omar A. and Chen, Stanley H.},
+  author={Choi, Joon Hee and Elgendy, Omar A. and Chan, Stanley H.},
   journal={IEEE Transactions on Image Processing},
   year={2019},
   volume={}, 
