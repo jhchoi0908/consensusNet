@@ -13,7 +13,7 @@ Given a set of image denoisers, each having a different denoising capability, is
 3. Different Denoiser Types (denoisers = DnCNN, FFDNet, BM3D, REDNet)
 
 
-### Testing Instructions
+### Testing Instructions (Please modify the folder for dataset)
 - Experiments 1 and 2
   ```
   python test.py --(options)
