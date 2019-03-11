@@ -30,3 +30,16 @@ Given a set of image denoisers, each having a different denoising capability, is
 - [MatConvNet](http://www.vlfeat.org/matconvnet/) & MATLAB R2017a: for Different Denoiser Types
 - [DnCNN](https://github.com/cszn/DnCNN): for Different Denoiser Types 
 - [FFDNet](https://github.com/cszn/FFDNet): for Different Denoiser Types
+
+
+### Citations
+@article{choi2019,
+  title={Optimal Combination of Image Denoisers},
+  author={Choi, Joon Hee and Elgendy, Omar A. and Chen, Stanley H.},
+  journal={IEEE Transactions on Image Processing},
+  year={2019},
+  volume={}, 
+  number={}, 
+  pages={},
+  doi={10.1109/TIP.2019.2903321}
+}
